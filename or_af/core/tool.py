@@ -1,5 +1,5 @@
 """
-Tool implementation for the Agentic Framework
+OR-AF Core Module - Tool implementation
 """
 
 import inspect
@@ -7,13 +7,13 @@ import time
 from typing import Callable, Dict, Any, Optional
 from pydantic import BaseModel, Field
 
-from .models import ToolSchema, ToolCall, ToolResult
-from .exceptions import ToolExecutionError
-from .logger import default_logger
+from ..models.tool_models import ToolSchema, ToolResult
+from ..exceptions import ToolExecutionError
+from ..utils.logger import default_logger
 
 
 class Tool(BaseModel):
-    """Represents a tool that the agent can use"""
+    """Represents a tool that can be used by agents via MCP servers."""
     
     name: str = Field(..., description="Tool name")
     func: Callable = Field(..., description="Tool function")
@@ -21,16 +21,16 @@ class Tool(BaseModel):
     
     class Config:
         arbitrary_types_allowed = True
-        extra = "allow"  # Allow extra attributes like logger
+        extra = "allow"
     
     def __init__(self, name: str, func: Callable, description: Optional[str] = None, **kwargs):
-        """Initialize tool"""
+        """Initialize tool."""
         desc = description or func.__doc__ or "No description provided"
         super().__init__(name=name, func=func, description=desc, **kwargs)
         object.__setattr__(self, 'logger', default_logger)
     
     def _extract_parameters(self) -> Dict[str, Any]:
-        """Extract function parameters and create OpenAI function schema"""
+        """Extract function parameters and create OpenAI function schema."""
         sig = inspect.signature(self.func)
         properties = {}
         required = []
@@ -39,14 +39,12 @@ class Tool(BaseModel):
         logger.debug(f"Extracting parameters for tool: {self.name}")
         
         for param_name, param in sig.parameters.items():
-            param_type = "string"  # Default type
+            param_type = "string"
             param_desc = f"Parameter {param_name}"
             
-            # Try to infer type from annotation
             if param.annotation != inspect.Parameter.empty:
                 annotation = param.annotation
                 
-                # Handle Optional types
                 if hasattr(annotation, '__origin__'):
                     if annotation.__origin__ is type(None):
                         continue
@@ -70,7 +68,6 @@ class Tool(BaseModel):
                 "description": param_desc
             }
             
-            # Check if parameter is required
             if param.default == inspect.Parameter.empty:
                 required.append(param_name)
         
@@ -81,7 +78,7 @@ class Tool(BaseModel):
         }
     
     def get_schema(self) -> ToolSchema:
-        """Get tool schema"""
+        """Get tool schema."""
         parameters = self._extract_parameters()
         return ToolSchema(
             name=self.name,
@@ -90,21 +87,12 @@ class Tool(BaseModel):
         )
     
     def to_openai_format(self) -> Dict[str, Any]:
-        """Convert tool to OpenAI function calling format"""
+        """Convert tool to OpenAI function calling format."""
         schema = self.get_schema()
         return schema.to_openai_format()
     
     def execute(self, tool_call_id: str, **kwargs) -> ToolResult:
-        """
-        Execute the tool with given arguments
-        
-        Args:
-            tool_call_id: ID of the tool call
-            **kwargs: Tool arguments
-            
-        Returns:
-            ToolResult with execution details
-        """
+        """Execute the tool with given arguments."""
         logger = object.__getattribute__(self, 'logger')
         logger.info(f"Executing tool: {self.name} with args: {kwargs}")
         start_time = time.time()
