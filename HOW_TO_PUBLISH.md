@@ -1,64 +1,111 @@
-# How to Publish or-af to PyPI
+# 🚀 How to Publish or-af to PyPI
 
 ## Current Status
 
 ✅ **Package is ready for publication!**
 
-- Package configuration is correct
-- Build process works successfully  
-- Trusted publisher is configured on PyPI
-- GitHub Actions workflow is set up correctly
+- ✅ Package configuration is correct
+- ✅ Build process works successfully (verified locally)
+- ✅ Package installs correctly (tested)
+- ✅ Trusted publisher is configured on PyPI (pending)
+- ✅ GitHub Actions workflow is set up correctly
+- ✅ All Python code is properly structured
 
 ## Why the Package is Not Available Yet
 
-The `or-af` package has not been published to PyPI yet. This is why you're seeing:
-```
+The `or-af` package has **not been published to PyPI yet**. This is why you're seeing:
+```bash
+pip install or-af
 ERROR: Could not find a version that satisfies the requirement or-af (from versions: none)
 ERROR: No matching distribution found for or-af
 ```
 
-## Solution: Create a GitHub Release
+**The package doesn't exist on PyPI yet because no release has been created.**
 
-You have already configured the **trusted publisher** on PyPI (pending publisher). Now you need to create a GitHub release to trigger the automated publishing workflow.
+## ✨ Solution: Create a GitHub Release
 
-### Steps to Publish:
+You have already configured the **trusted publisher** on PyPI (pending publisher status). Now you just need to **create a GitHub release** to trigger the automated publishing workflow.
 
-1. **Go to your GitHub repository**: https://github.com/iaakashRoy/or-af
+### 📝 Step-by-Step Instructions:
 
-2. **Navigate to Releases**:
-   - Click on "Releases" in the right sidebar
+#### Step 1: Navigate to Releases
+1. Go to your repository: https://github.com/iaakashRoy/or-af
+2. Click on "**Releases**" in the right sidebar
    - Or go directly to: https://github.com/iaakashRoy/or-af/releases
 
-3. **Create a new release**:
-   - Click "Draft a new release" or "Create a new release"
-   
-4. **Configure the release**:
-   - **Choose a tag**: Create a new tag `v0.1.0`
-   - **Release title**: `v0.1.0 - Initial Release`
-   - **Description**: Add release notes from CHANGELOG.md or write:
-     ```
-     First release of OR-AF (Operations Research Agentic Framework)
-     
-     Features:
-     - Lightweight framework for creating AI agents
-     - Tool-calling capabilities
-     - Streaming support
-     - Comprehensive observability
-     ```
-   
-5. **Publish the release**:
-   - Click "Publish release"
-   - This will automatically trigger the GitHub Actions workflow
+#### Step 2: Create New Release
+1. Click "**Draft a new release**" (or "**Create a new release**")
 
-6. **Monitor the workflow**:
-   - Go to the "Actions" tab in your repository
-   - You should see "Publish to PyPI" workflow running
-   - Wait for it to complete (usually takes 1-2 minutes)
+#### Step 3: Configure Release Details
+Fill in the following:
 
-7. **Verify publication**:
-   - Once the workflow completes successfully, your package will be on PyPI!
-   - Visit: https://pypi.org/project/or-af/
-   - Install with: `pip install or-af`
+- **Choose a tag**: 
+  - Click on "Choose a tag" dropdown
+  - Type `v0.1.0` (this creates a new tag)
+  - Click "**+ Create new tag: v0.1.0 on publish**"
+
+- **Release title**: 
+  ```
+  v0.1.0 - Initial Release
+  ```
+
+- **Description**: Copy and paste this:
+  ```markdown
+  ## 🎉 First Release of OR-AF
+  
+  Operations Research Agentic Framework - A lightweight framework for creating AI agents with tool-calling capabilities.
+  
+  ### Features
+  - 🔧 Easy tool registration with automatic schema generation
+  - 📊 Full observability with custom callbacks
+  - 🌊 Real-time streaming of agent responses
+  - 📝 Comprehensive logging (console and file)
+  - ✅ Type safety with Pydantic
+  - ⚡ Minimal dependencies, maximum performance
+  - 🎯 Simple, intuitive API
+  
+  ### Installation
+  ```bash
+  pip install or-af
+  ```
+  
+  ### Requirements
+  - Python 3.8+
+  - openai >= 1.0.0
+  - python-dotenv >= 1.0.0
+  - pydantic >= 2.0.0
+  
+  See the [README](https://github.com/iaakashRoy/or-af#readme) for quick start guide and examples.
+  ```
+
+- **Set as the latest release**: ✅ (checked)
+- **Set as a pre-release**: ⬜ (unchecked)
+
+#### Step 4: Publish! 🚀
+1. Click the green "**Publish release**" button
+2. This automatically triggers the GitHub Actions workflow
+
+#### Step 5: Monitor Progress
+1. Go to the "**Actions**" tab: https://github.com/iaakashRoy/or-af/actions
+2. You'll see "**Publish to PyPI**" workflow running
+3. Click on it to see real-time logs
+4. Wait 1-2 minutes for it to complete ⏱️
+
+#### Step 6: Verify Success! 🎊
+Once the workflow shows a green checkmark:
+
+1. Visit your package: https://pypi.org/project/or-af/
+2. Test installation:
+   ```bash
+   pip install or-af
+   ```
+3. Verify it works:
+   ```bash
+   python -c "import or_af; print(or_af.__version__)"
+   # Should print: 0.1.0
+   ```
+
+**Congratulations! Your package is now live on PyPI!** 🎉
 
 ## How It Works
 
@@ -93,7 +140,14 @@ If you prefer not to create a release, you can manually trigger the workflow:
 
 **Note**: This requires that you merge your changes to the main branch first.
 
-## Troubleshooting
+## 🔧 Troubleshooting
+
+### "ERROR: No matching distribution found for or-af"
+
+**This is the error you're currently seeing.** It's normal and expected because:
+- The package hasn't been published yet
+- Once you create the release (see above), this error will go away
+- After publication, `pip install or-af` will work perfectly
 
 ### Workflow Fails with Authentication Error
 - Verify the pending publisher is still configured on PyPI
