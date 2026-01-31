@@ -63,6 +63,12 @@ Once PyPI is configured:
 - It will publish to PyPI using Trusted Publishing
 - Within minutes, `pip install or-af` will work!
 
+**📊 How to monitor the workflow**: See `MONITORING_WORKFLOW.md` for detailed instructions on:
+- How to check if the workflow is running
+- How to view workflow logs
+- What each status means (in progress, success, failed)
+- Troubleshooting common issues
+
 ### Step 4: Verify
 
 ```bash
@@ -100,6 +106,7 @@ Once you configure PyPI Trusted Publishing and create the GitHub release:
 
 ## 📖 Reference Documents
 
+- `MONITORING_WORKFLOW.md` - How to check if GitHub Actions automation is working
 - `PYPI_PUBLISHING_DETAILS.md` - Exact values for PyPI configuration
 - `PUBLISHING.md` - Detailed publishing guide
 - `PYPI_CHECKLIST.md` - Pre-publishing checklist
