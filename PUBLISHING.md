@@ -123,6 +123,11 @@ If `or-af` is taken, you'll need to choose a different name. Update:
 - Check credentials are correct
 - Verify `~/.pypirc` format if using tokens
 
+### Twine check warnings
+- You may see warnings about "License-File" metadata field
+- This is a known compatibility issue with some twine versions
+- The package will still upload and install correctly
+
 ### Build errors
 - Ensure all required files are included in MANIFEST.in
 - Check pyproject.toml syntax
