@@ -24,7 +24,7 @@ A lightweight, production-ready framework for creating AI agents with tool-calli
 ### From Source (Development)
 
 ```bash
-git clone https://github.com/yourusername/or-af.git
+git clone https://github.com/iaakashRoy/or-af.git
 cd or-af
 pip install -e .
 ```
@@ -324,4 +324,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support
 
-For issues, questions, or contributions, please visit our [GitHub repository](https://github.com/yourusername/or-af).
+For issues, questions, or contributions, please visit our [GitHub repository](https://github.com/iaakashRoy/or-af).
