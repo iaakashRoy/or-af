@@ -251,16 +251,15 @@ Replace `iaakashRoy/or-af` with your repository if needed:
 
 1. **Test first with TestPyPI**: Before publishing to PyPI, you can test with TestPyPI (requires modifying the workflow)
 
-2. **Manual trigger**: You can manually run the workflow:
+2. **Manual trigger**: The workflow supports manual runs via `workflow_dispatch`:
    - Go to Actions → Publish to PyPI
    - Click "Run workflow"
    - Select the branch
    - Click "Run workflow"
+   - Note: Manual runs won't automatically create a release tag
 
 3. **Re-run failed workflows**: If a workflow fails due to a temporary issue:
    - Click "Re-run all jobs" on the workflow page
-
-4. **Download build artifacts**: The built packages are available in the workflow logs
 
 ## 📚 Related Documentation
 
